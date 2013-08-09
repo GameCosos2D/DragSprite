@@ -41,68 +41,15 @@
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
 		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
-
-		// ask director for the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
+        _MoveableSpriteTouch = FALSE;
+        self.isTouchEnabled = YES;
+        _MoveableSprite = [CCSprite spriteWithFile:@"smile.png"];
+        _MoveableSprite.position = ccp(_MoveableSprite.contentSize.width / 2, _MoveableSprite.contentSize.height / 2);
+        [self addChild:_MoveableSprite];
 	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		[self addChild: label];
-		
-		
-		
-		//
-		// Leaderboards and Achievements
-		//
-		
-		// Default font size will be 28 points.
-		[CCMenuItemFont setFontSize:28];
-		
-		// to avoid a retain-cycle with the menuitem and blocks
-		__block id copy_self = self;
-		
-		// Achievement Menu Item using blocks
-		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-			
-			
-			GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-			achivementViewController.achievementDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:achivementViewController animated:YES];
-			
-			[achivementViewController release];
-		}];
-		
-		// Leaderboard Menu Item using blocks
-		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-			
-			
-			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-			leaderboardViewController.leaderboardDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-			
-			[leaderboardViewController release];
-		}];
-
-		
-		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
-		
-		[menu alignItemsHorizontallyWithPadding:20];
-		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
-		
-		// Add the menu to the layer
-		[self addChild:menu];
-
-	}
+    }
 	return self;
 }
 
@@ -130,4 +77,37 @@
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }
+
+#pragma mark Touch delegate
+
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch* myTouch = [touches anyObject];
+	CGPoint location = [myTouch locationInView: [myTouch view]];
+	location = [[CCDirector sharedDirector]convertToGL:location];
+	
+	CGRect MoveableSpriteRect = CGRectMake(_MoveableSprite.position.x - (_MoveableSprite.contentSize.width/2),
+                                           _MoveableSprite.position.y - (_MoveableSprite.contentSize.height/2),
+                                           _MoveableSprite.contentSize.width,
+                                           _MoveableSprite.contentSize.height);
+	if (CGRectContainsPoint(MoveableSpriteRect, location)) {
+		_MoveableSpriteTouch=TRUE;
+	}
+	
+	
+}
+-(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *myTouch = [touches anyObject];
+	CGPoint point = [myTouch locationInView:[myTouch view]];
+	point = [[CCDirector sharedDirector] convertToGL:point];
+	//CCNode *sprite = [self getChildByTag:kTagBall];
+	if(_MoveableSpriteTouch==TRUE){
+		[_MoveableSprite setPosition:point];
+	}
+	//return YES;
+}
+-(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	_MoveableSpriteTouch=FALSE;
+}
+
 @end

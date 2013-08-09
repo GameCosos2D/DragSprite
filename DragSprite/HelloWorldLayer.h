@@ -15,6 +15,8 @@
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
+    CCSprite *_MoveableSprite;
+    bool _MoveableSpriteTouch;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

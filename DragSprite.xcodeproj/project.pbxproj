@@ -141,6 +141,7 @@
 		18D2BEE517B5A8C300084052 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BEE417B5A8C300084052 /* AppDelegate.m */; };
 		18D2BEE817B5A8C300084052 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BEE717B5A8C300084052 /* HelloWorldLayer.m */; };
 		18D2BEEB17B5A8C300084052 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BEEA17B5A8C300084052 /* IntroLayer.m */; };
+		18D2BEF317B5A8CF00084052 /* smile.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D2BEF217B5A8CF00084052 /* smile.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -425,6 +426,7 @@
 		18D2BEE717B5A8C300084052 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		18D2BEE917B5A8C300084052 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		18D2BEEA17B5A8C300084052 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		18D2BEF217B5A8CF00084052 /* smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,6 +503,7 @@
 		18D2BD5317B5A8C000084052 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				18D2BEF117B5A8C800084052 /* Sprite */,
 				18D2BD5417B5A8C000084052 /* Default.png */,
 				18D2BD5617B5A8C000084052 /* Default@2x.png */,
 				18D2BD5817B5A8C000084052 /* Default-568h@2x.png */,
@@ -879,6 +882,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		18D2BEF117B5A8C800084052 /* Sprite */ = {
+			isa = PBXGroup;
+			children = (
+				18D2BEF217B5A8CF00084052 /* smile.png */,
+			);
+			name = Sprite;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -942,6 +953,7 @@
 				18D2BD6717B5A8C000084052 /* Icon@2x.png in Resources */,
 				18D2BD6A17B5A8C000084052 /* iTunesArtwork in Resources */,
 				18D2BEC317B5A8C300084052 /* ChangeLog in Resources */,
+				18D2BEF317B5A8CF00084052 /* smile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
